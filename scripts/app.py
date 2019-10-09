@@ -17,6 +17,12 @@ class user:
     def create_repo(self):
         self.auth.get_user().create_repo("octomemo_" + self._login, private=True)
 
+    def list_all_notes(self):
+        repo = self.auth.get_user().get_repo("octomemo_" + self._login)
+        print("Avaiable notes:")
+        for file in repo.get_dir_contents(""):
+            print(file.name)
+
 
 def main():
     print(
@@ -32,6 +38,7 @@ def main():
     login = input("please enter your login:")
     password = input("please enter your password:")
     guser = user(login, password)
+    guser.list_all_notes()
 
 
 if __name__ == "__main__":
