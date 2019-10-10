@@ -29,11 +29,11 @@ class user:
         repo.create_file(path, message, content)
 
     def remove_note(self):
-        pass
-
-    def edit_note(self, path, sha, message="Removing file"):
         repo = self.auth.get_user().get_repo("octomemo_" + self._login)
         repo.delete_file(path, message, sha)
+
+    def edit_note(self, path, sha, message="Removing file"):
+        pass
 
 
 def main():
@@ -49,9 +49,17 @@ def main():
     )
     login = input("please enter your login:")
     password = input("please enter your password:")
-    guser = user(login, password)
-    guser.list_all_notes()
-    guser.create_note("chamanodale.md", "yes, I know")
+    new_user = user(login, password)
+    print(
+        """
+    1 - List all notes
+    2 - Create new note
+    3 - Edit note
+    4 - Delete note
+    5 - Exit
+    """
+    )
+    option = input(">")
 
 
 if __name__ == "__main__":
