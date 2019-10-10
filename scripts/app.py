@@ -28,7 +28,7 @@ class user:
         repo = self.auth.get_user().get_repo("octomemo_" + self._login)
         repo.create_file(path, message, content)
 
-    def remove_note(self):
+    def delete_note(self):
         repo = self.auth.get_user().get_repo("octomemo_" + self._login)
         repo.delete_file(path, message, sha)
 
@@ -59,7 +59,14 @@ def main():
     5 - Exit
     """
     )
-    option = input(">")
+    option = int(input(">"))
+    """
+    case 1: list_all_notes()    --
+    case 2: create_note()       --
+    case 3: edit_note()         --
+    case 4: delele_note()       --
+    case 5: exit()              --
+    """
 
 
 if __name__ == "__main__":
