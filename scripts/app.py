@@ -1,4 +1,5 @@
 from github import Github
+import getpass
 
 """
 TODO:
@@ -11,6 +12,7 @@ TODO:
 
 class user:
     def __init__(self, login, password):
+        """dale."""
         self._login = login
         self._password = password
         self.auth = Github(login, password)
@@ -24,31 +26,21 @@ class user:
         for file in repo.get_dir_contents(""):
             print(file.name)
 
-    def create_note(self, path, content, message="none"):
+    def create_note(self, name, message="none", content=""):
         repo = self.auth.get_user().get_repo("octomemo_" + self._login)
-        repo.create_file(path, message, content)
+        repo.create_file(name, message, content)
 
-    def delete_note(self):
+    def delete_note(self, nome):
         repo = self.auth.get_user().get_repo("octomemo_" + self._login)
-        repo.delete_file(path, message, sha)
+        repo.delete_file(nome, message="deleting file", sha)
 
     def edit_note(self, path, sha, message="Removing file"):
         pass
 
 
 def main():
-    print(
-        """
-        | GitNote |
-        | ---o--- |
-        | ------- |
-        | ---m--- |
-        | ------- |
-        | ---g--- |
-    """
-    )
     login = input("please enter your login:")
-    password = input("please enter your password:")
+    password = getpass.getpass("Enter your password: ")
     new_user = user(login, password)
     print(
         """
@@ -59,14 +51,23 @@ def main():
     5 - Exit
     """
     )
-    option = int(input(">"))
-    """
-    case 1: list_all_notes()    --
-    case 2: create_note()       --
-    case 3: edit_note()         --
-    case 4: delele_note()       --
-    case 5: exit()              --
-    """
+    while 1:
+        option = int(input(">"))
+        if option == 1:
+            new_user.list_all_notes()
+        elif option == 2:
+            name = input("name of note:")
+            text = input("text:")
+            new_user.create_note(name, content=text)
+            print("Sucessfully created note!")
+        elif option == 3:
+            new_user.edit_note()
+        elif option == 4:
+            new_user.delete_note()
+        elif option == 5:
+            exit()
+        else:
+            print("Invalid input, try again.")
 
 
 if __name__ == "__main__":
