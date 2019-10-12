@@ -6,8 +6,8 @@ from user import User
 def cli():
     context = click.get_current_context()
     context.obj = {}
-    login = input("login:")
-    password = input("password:")
+    login = "user"
+    password = "pswrd"
     memouser = User(login, password)
     context.obj["memouser"] = memouser
 
@@ -26,6 +26,14 @@ def cnote(context):
     filename = input("filename:")
     text = input("text:")
     user.create_note(filename, text)
+
+
+@cli.command()
+@click.pass_context
+def dnote(context):
+    user = context.obj[u"memouser"]
+    filename = filename = input("filename:")
+    user.delete_note(filename)
 
 
 if __name__ == "__main__":

@@ -30,9 +30,10 @@ class User:
         repo = self.auth.get_user().get_repo("octomemo_" + self._login)
         repo.create_file(name, message, content)
 
-    # def delete_note(self, nome):
-    #     repo = self.auth.get_user().get_repo("octomemo_" + self._login)
-    #     repo.delete_file(nome, message="deleting file", sha)
+    def delete_note(self, nome, message="deleting file"):
+        repo = self.auth.get_user().get_repo("octomemo_" + self._login)
+        sha = repo.get_contents(nome).sha
+        repo.delete_file(nome, message, sha)
 
     def edit_note(self, path, message="Removing file"):
         pass
