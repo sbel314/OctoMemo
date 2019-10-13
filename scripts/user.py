@@ -1,18 +1,9 @@
 from github import Github
 import getpass
 
-"""
-TODO:
-    - list all notes
-    - create new note
-    - edit note
-    - delete note
-"""
-
 
 class User:
     def __init__(self, login, password):
-        """dale."""
         self._login = login
         self._password = password
         self.auth = Github(login, password)
