@@ -1,4 +1,6 @@
 from github import Github
+import base64
+import os
 
 
 class User:
@@ -38,5 +40,20 @@ class User:
         sha = repo.get_contents(name).sha
         repo.delete_file(name, message, sha)
 
-    def edit_note(self):
-        pass
+    def edit_note(self, name):
+        """Method to edit a note in a github repository.
+
+        :param str name: Name of note to be deleted
+        """
+        repo = self.auth.get_user().get_repo("octomemo_" + self._login)
+        file = repo.get_contents(name)
+        text = base64.b64decode(file.content).decode("utf-8")
+        f = open(name, "w+")
+        f.write(text)
+        f.close()
+        myCmd = "nano " + name
+        os.system(myCmd)
+        sha = repo.get_contents(name).sha
+        f = open(name, "r")
+        contents = f.read()
+        repo.update_file(name, "none", contents, sha)
