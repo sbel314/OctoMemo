@@ -1,4 +1,4 @@
-<h1 align="center">:octocat:OctoMemo:memo:</h1>
+<h1 align="center">:octocat: OctoMemo :memo:</h1>
 
 <p align="center" style="margin-bottom: 5px; margin-top: 5px;">
   <a href="https://travis-ci.org/LeonardoFurtado/OctoMemo">
