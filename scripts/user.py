@@ -16,9 +16,14 @@ class User:
     def list_all_notes(self):
         """Method to list all notes in a github repository."""
         repo = self.auth.get_user().get_repo("octomemo_" + self._login)
-        print("Avaiable notes:")
-        for file in repo.get_dir_contents(""):
-            print(file.name)
+         
+        # Test to see if there are any files in this repo
+        if len(repo.get_dir_contents("")) == 0):
+            print("You currently have no notes in %s" % repo)    
+        else:
+            print("Available notes:")
+            for file in repo.get_dir_contents(""):
+                print(file.name)
 
     def create_note(self, name, message="none", content=""):
         """Method to create a note in a github repository.
